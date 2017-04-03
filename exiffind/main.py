@@ -2,18 +2,20 @@ import os
 import exifread
 import argparse
 import dateutil.parser as du
+import sys
 
-def main():
+
+def main(args):
     parser = argparse.ArgumentParser(description="Find images by their EXIF data")
     parser.add_argument("dir", type=str, help="base dir to search in")
     parser.add_argument("--before", type=str, help="date to be digitized before in format YY-MM-DD")
     parser.add_argument("--after", type=str, help="date to be digitized after in format YY-MM-DD")
     parser.add_argument("--ext", nargs=1, type=str, help="search only for files with $EXT extensions")
-    parser.add_argument("--orientation", type=str, choices=["Horizontal", "Vertical"])
+    parser.add_argument("--orientation", type=str, choices=["horizontal", "vertical"])
     parser.add_argument("--author", type=str)
     parser.add_argument("--software", type=str)
 
-    args = dict(parser.parse_args().__dict__)
+    args = dict(parser.parse_args(args).__dict__)
     check(args)
 
 
@@ -108,4 +110,4 @@ def enumerate_files(dir: str, exts: list = None):
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv)
