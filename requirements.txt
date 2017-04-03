@@ -1,0 +1,2 @@
+exifread
+python-dateutil
