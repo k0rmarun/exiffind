@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='exiffind',
-    version='0.0.2',
+    version='0.0.3',
     packages=['exiffind'],
     url='https://github.com/k0rmarun/exiffind',
     license='MIT',
@@ -26,7 +26,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
 
         # Indicate who your project is intended for
         'Environment :: Console',
