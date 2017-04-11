@@ -3,7 +3,7 @@ import exifread
 import argparse
 import sys
 
-import checks as efc
+from checks import checks
 
 from pprint import pprint
 
@@ -19,11 +19,18 @@ def main(args):
     parser.add_argument("--orientation", type=str, choices=["horizontal", "vertical"])
     parser.add_argument("--author", type=str)
     parser.add_argument("--software", type=str)
-    parser.add_argument("--width", type=str)
-    parser.add_argument("--height", type=str)
+    parser.add_argument("--width", type=str, help="search by image with (supports ranges)")
+    parser.add_argument("--height", type=str, help="search by image height (supports ranges)")
+    parser.add_argument("--manufacturer", type=str, help="search by camera manufacturer")
+    parser.add_argument("--model", type=str, help="search by camera model")
+    parser.add_argument("--speed", type=str, help="search by speed (ISO value, supports ranges)")
+    parser.add_argument("--exposure", type=str, help="search by exposure time (supports ranges)")
+    parser.add_argument("--aperture", type=str, help="search by aperture value (supports ranges)")
+    parser.add_argument("--fnumber", type=str, help="search by f-number (supports ranges)")
+    parser.add_argument("--xresolution", type=str, help="search by resolution in x direction (supports ranges)")
+    parser.add_argument("--yresolution", type=str, help="search by resolution in y direction (supports ranges)")
 
     args = dict(parser.parse_args(args).__dict__)
-    print(args)
     if "dir" not in args or len(args["dir"]) == 0:
         parser.print_help()
     else:
@@ -32,15 +39,16 @@ def main(args):
 
 
 def check(args: dict):
-    tests = (efc.before, efc.after, efc.width, efc.height, efc.author, efc.software, efc.orientation)
     for dir, file in enumerate_files(args.get("dir", "."), args.get("ext", None)):
         with open(os.path.join(dir, file), "rb") as f:
             tags = exifread.process_file(f, details=False)
             if len(tags) is 0:
                 continue
 
+            #pprint(tags, indent=4, width=200)
+
             ok = True
-            for test in tests:
+            for test in checks:
                 ok &= test(tags, args)
                 if not ok:
                     break

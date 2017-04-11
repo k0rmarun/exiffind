@@ -2,13 +2,31 @@ from setuptools import setup
 
 setup(
     name='exiffind',
-    version='0.0.3',
+    version='0.0.5',
     packages=['exiffind'],
     url='https://github.com/k0rmarun/exiffind',
     license='MIT',
     author='Kormarun',
     author_email='kormarun@gmail.com',
     description='Find images by their exif tags',
+    long_description=""""Find images bei their exif tags.
+- before: date to be digitized before in format YY-MM-DD (other date formats might work)
+- after: date to be digitized after in format YY-MM-DD (other date formats might work)
+- ext: search only for files with $EXT extensions
+- orientation: horizontal, vertical
+- author: 
+- software:
+- width: search by image with (supports ranges)
+- height: search by image height (supports ranges)
+- manufacturer: search by camera manufacturer
+- model: search by camera model
+- speed: search by speed (ISO value, supports ranges)
+- exposure: search by exposure time (supports ranges)
+- aperture: search by aperture value (supports ranges)
+- fnumber: search by f-number (supports ranges)
+- xresolution: search by resolution in x direction (supports ranges)
+- yresolution: search by resolution in y direction (supports ranges)
+    """,
 
     entry_points={
         "console_scripts": [
