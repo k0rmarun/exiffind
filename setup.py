@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='exiffind',
-    version='0.0.3',
+    version='0.0.4',
     packages=['exiffind'],
     url='https://github.com/k0rmarun/exiffind',
     license='MIT',
